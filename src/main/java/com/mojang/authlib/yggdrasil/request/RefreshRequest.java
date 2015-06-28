@@ -18,4 +18,22 @@ public class RefreshRequest {
         this.accessToken = authenticationService.getAuthenticatedToken();
         this.selectedProfile = profile;
     }
+
+	public String getClientToken() {
+		return clientToken;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public GameProfile getSelectedProfile() {
+		return selectedProfile;
+	}
+
+	public boolean isRequestUser() {
+		return requestUser;
+	}
+    
+    
 }

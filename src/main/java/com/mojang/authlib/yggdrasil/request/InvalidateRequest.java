@@ -10,4 +10,14 @@ public class InvalidateRequest {
         this.accessToken = authenticationService.getAuthenticatedToken();
         this.clientToken = authenticationService.getAuthenticationService().getClientToken();
     }
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public String getClientToken() {
+		return clientToken;
+	}
+    
+    
 }

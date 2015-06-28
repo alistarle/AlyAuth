@@ -16,4 +16,26 @@ public class AuthenticationRequest {
         this.clientToken = authenticationService.getAuthenticationService().getClientToken();
         this.password = password;
     }
+
+	public Agent getAgent() {
+		return agent;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public String getClientToken() {
+		return clientToken;
+	}
+
+	public boolean isRequestUser() {
+		return requestUser;
+	}
+    
+    
 }

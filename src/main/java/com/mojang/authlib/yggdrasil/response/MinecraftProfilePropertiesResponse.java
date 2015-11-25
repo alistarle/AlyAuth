@@ -20,4 +20,18 @@ public class MinecraftProfilePropertiesResponse extends Response {
     public PropertyMap getProperties() {
         return properties;
     }
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setProperties(PropertyMap properties) {
+		this.properties = properties;
+	}
+    
+    
 }

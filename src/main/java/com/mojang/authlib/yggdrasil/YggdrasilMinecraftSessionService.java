@@ -38,9 +38,9 @@ import java.util.concurrent.TimeUnit;
 
 public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionService {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final String BASE_URL = "http://alykraft.fr/action.php?action=";
-    private static final URL JOIN_URL = HttpAuthenticationService.constantURL(BASE_URL + "newClient");
-    private static final URL CHECK_URL = HttpAuthenticationService.constantURL(BASE_URL + "newServer");
+    private static final String BASE_URL = "https://alykraft.fr:8443/Alyweb/rest/yggdrasil/";
+    private static final URL JOIN_URL = HttpAuthenticationService.constantURL(BASE_URL + "join");
+    private static final URL CHECK_URL = HttpAuthenticationService.constantURL(BASE_URL + "hasJoined");
 
     private final PublicKey publicKey;
     private final Gson gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
@@ -54,7 +54,7 @@ public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionServic
                 }
             });
 
-    protected YggdrasilMinecraftSessionService(YggdrasilAuthenticationService authenticationService) {
+    public YggdrasilMinecraftSessionService(YggdrasilAuthenticationService authenticationService) {
         super(authenticationService);
 
         try {

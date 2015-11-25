@@ -34,4 +34,10 @@ public class ProfileSearchResultsResponse extends Response {
             return result;
         }
     }
+
+	public void setProfiles(GameProfile[] profiles) {
+		this.profiles = profiles;
+	}
+    
+    
 }

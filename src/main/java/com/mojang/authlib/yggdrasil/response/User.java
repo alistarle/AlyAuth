@@ -13,4 +13,14 @@ public class User {
     public PropertyMap getProperties() {
         return properties;
     }
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setProperties(PropertyMap properties) {
+		this.properties = properties;
+	}
+    
+    
 }

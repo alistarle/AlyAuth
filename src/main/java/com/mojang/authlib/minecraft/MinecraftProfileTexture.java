@@ -1,9 +1,11 @@
 package com.mojang.authlib.minecraft;
 
+import java.io.Serializable;
+
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class MinecraftProfileTexture {
+public class MinecraftProfileTexture implements Serializable {
     public enum Type {
         SKIN,
         CAPE,

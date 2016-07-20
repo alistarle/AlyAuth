@@ -27,6 +27,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.KeyFactory;
 import java.security.PublicKey;
@@ -37,6 +39,9 @@ import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionService {
+
+    private static final String[] WHITELISTED_DOMAINS = { ".minecraft.net", ".mojang.com", "alykraft.fr", "ombreval.fr" };
+
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String BASE_URL = "https://alykraft.fr:8443/Alyweb/rest/yggdrasil/";
     private static final URL JOIN_URL = HttpAuthenticationService.constantURL(BASE_URL + "join");
@@ -132,7 +137,18 @@ public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionServic
             return new HashMap<MinecraftProfileTexture.Type, MinecraftProfileTexture>();
         }
 
-        return result.getTextures() == null ? new HashMap<MinecraftProfileTexture.Type, MinecraftProfileTexture>() : result.getTextures();
+        if (result.getTextures() == null) {
+            return new HashMap();
+        }
+
+        for (Map.Entry entry : result.getTextures().entrySet()) {
+            if (!isWhitelistedDomain(((MinecraftProfileTexture)entry.getValue()).getUrl())) {
+                LOGGER.error("Textures payload has been tampered with (non-whitelisted domain)");
+                return new HashMap();
+            }
+        }
+
+        return result.getTextures();
     }
 
     public GameProfile fillProfileProperties(GameProfile profile, boolean requireSecure) {
@@ -172,5 +188,24 @@ public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionServic
     @Override
     public YggdrasilAuthenticationService getAuthenticationService() {
         return (YggdrasilAuthenticationService) super.getAuthenticationService();
+    }
+
+    private static boolean isWhitelistedDomain(String url) {
+        URI uri = null;
+        try
+        {
+            uri = new URI(url);
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException(new StringBuilder().append("Invalid URL '").append(url).append("'").toString());
+        }
+
+        String domain = uri.getHost();
+
+        for (int i = 0; i < WHITELISTED_DOMAINS.length; i++) {
+            if (domain.endsWith(WHITELISTED_DOMAINS[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 }

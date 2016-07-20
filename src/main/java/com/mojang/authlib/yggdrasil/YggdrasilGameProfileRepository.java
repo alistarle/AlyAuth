@@ -15,7 +15,7 @@ import java.util.Set;
 public class YggdrasilGameProfileRepository implements GameProfileRepository {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String BASE_URL = "https://alykraft.fr:8443/Alyweb/rest/yggdrasil/";
-    private static final String SEARCH_PAGE_URL = BASE_URL + "profile";
+    private static final String SEARCH_PAGE_URL = BASE_URL + "profiles/";
     private static final int ENTRIES_PER_PAGE = 2;
     private static final int MAX_FAIL_COUNT = 3;
     private static final int DELAY_BETWEEN_PAGES = 100;

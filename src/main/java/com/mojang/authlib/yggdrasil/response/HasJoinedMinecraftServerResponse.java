@@ -11,8 +11,16 @@ public class HasJoinedMinecraftServerResponse extends Response {
     public UUID getId() {
         return id;
     }
+    
+    public void setId(UUID id) {
+    	this.id = id;
+    }
 
     public PropertyMap getProperties() {
         return properties;
+    }
+    
+    public void setProperties(PropertyMap properties) {
+    	this.properties = properties;
     }
 }

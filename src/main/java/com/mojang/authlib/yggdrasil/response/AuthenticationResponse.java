@@ -29,4 +29,26 @@ public class AuthenticationResponse extends Response {
         return user;
     }
 
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public void setClientToken(String clientToken) {
+		this.clientToken = clientToken;
+	}
+
+	public void setSelectedProfile(GameProfile selectedProfile) {
+		this.selectedProfile = selectedProfile;
+	}
+
+	public void setAvailableProfiles(GameProfile[] availableProfiles) {
+		this.availableProfiles = availableProfiles;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+    
+    
+
 }

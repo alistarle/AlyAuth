@@ -250,7 +250,7 @@ public abstract class BaseUserAuthentication implements UserAuthentication {
         this.userType = userType;
     }
 
-    protected void setUserid(String userid) {
+    public void setUserid(String userid) {
         this.userid = userid;
     }
 }

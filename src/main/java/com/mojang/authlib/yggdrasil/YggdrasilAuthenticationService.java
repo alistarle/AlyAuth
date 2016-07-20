@@ -49,6 +49,7 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
     protected <T extends Response> T makeRequest(URL url, Object input, Class<T> classOfT) throws AuthenticationException {
         try {
             String jsonResult = input == null ? performGetRequest(url) : performPostRequest(url, gson.toJson(input), "application/json");
+            System.out.println(jsonResult);
             T result = gson.fromJson(jsonResult, classOfT);
 
             if (result == null) return null;
@@ -75,6 +76,10 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
 
     public String getClientToken() {
         return clientToken;
+    }
+    
+    public Gson getGson() {
+    	return gson;
     }
 
     private static class GameProfileSerializer implements JsonSerializer<GameProfile>, JsonDeserializer<GameProfile> {

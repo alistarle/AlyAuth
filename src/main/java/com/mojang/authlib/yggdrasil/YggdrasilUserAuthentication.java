@@ -9,6 +9,7 @@ import com.mojang.authlib.yggdrasil.request.RefreshRequest;
 import com.mojang.authlib.yggdrasil.response.AuthenticationResponse;
 import com.mojang.authlib.yggdrasil.response.RefreshResponse;
 import com.mojang.authlib.yggdrasil.response.User;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -19,8 +20,11 @@ import java.util.*;
 
 public class YggdrasilUserAuthentication extends HttpUserAuthentication {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final String BASE_URL = "http://alykraft.fr/action.php?action=";
-    private static final URL ROUTE_AUTHENTICATE = HttpAuthenticationService.constantURL(BASE_URL + "newLauncher");
+    private static final String BASE_URL = "https://alykraft.fr:8443/Alyweb/rest/yggdrasil/";
+    //private static final URL ROUTE_AUTHENTICATE = HttpAuthenticationService.constantURL(BASE_URL + "newLauncher");
+    //J2E
+    private static final URL ROUTE_AUTHENTICATE = HttpAuthenticationService.constantURL("https://alykraft.fr:8443/Alyweb/rest/yggdrasil/authenticate");
+
     private static final URL ROUTE_REFRESH = HttpAuthenticationService.constantURL(BASE_URL + "refresh");
     private static final URL ROUTE_VALIDATE = HttpAuthenticationService.constantURL(BASE_URL + "validate");
     private static final URL ROUTE_INVALIDATE = HttpAuthenticationService.constantURL(BASE_URL + "invalidate");
@@ -249,4 +253,8 @@ public class YggdrasilUserAuthentication extends HttpUserAuthentication {
     public YggdrasilAuthenticationService getAuthenticationService() {
         return (YggdrasilAuthenticationService) super.getAuthenticationService();
     }
+
+	public void setAuthenticatedToken(String string) {
+		this.accessToken = string;
+	}
 }
